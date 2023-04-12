@@ -1,0 +1,52 @@
+ass=sum>
+<THEAD>
+<TR><TH class=evt COLSPAN=3>59 Excel Preliminary Plus Girls Free Skate / Free Skate</TH><TH class=totSeg>Total</TH><TH class=totElm>Total</TH><TH class=totComp>Total</TH></TR>
+<TR><TH class=rank>Place<BR>&nbsp;</TH><TH class=name>Name<BR>&nbsp;</TH><TH class=nation>Nation<BR>&nbsp;</TH><TH class=totSeg>Seg<BR>Score<BR>=</TH><TH class=totElm>Elm<BR>Score<BR>+</TH><TH class=totComp>Comp<BR>Score<BR>+</TH><TH class=bonus>&nbsp;</TH><TH class=totDed>Ded<BR>-</TH></TR>
+</THEAD>
+<TBODY>
+<TR><TD class=rank>4</TD><TD class=name>Leela Chan, Gate City FSC</TD><TD class=nation></TD><TD class=totSeg>17.72</TD><TD class=totElm>8.76</TD><TD class=totComp>9.96</TD><TD class=bonus>&nbsp;</TD><TD class=totDed>1.00</TD></TR>
+</TBODY>
+</TABLE>
+<TABLE class=elm>
+<THEAD>
+<TR><TH class=num>#</TH><TH class=elem>Executed<BR>Elements</TH><TH class=info>I</TH><TH class=bv>Base<BR>Value</TH><TH class=two></TH><TH class=goe>GOE</TH><TH class=ded>&nbsp;</TH><TH class=jud>&nbsp;J1</TH><TH class=jud>&nbsp;J2</TH><TH class=jud>&nbsp;J3</TH><TH class=jud>&nbsp;J4</TH><TH class=jud>&nbsp;J5</TH><TH class=jud>&nbsp;J6</TH><TH class=jud>&nbsp;J7</TH><TH class=jud>&nbsp;J8</TH><TH class=jud>&nbsp;J9</TH><TH class=jud></TH><TH class=ref></TH><TH class=psl>Panel<BR>Scores</TH><TH class=rmar></TH></TR>
+</THEAD>
+<TBODY>
+<TR><TD class=num>1</TD><TD class=elem>1F</TD><TD class=info></TD><TD class=bv>0.50</TD><TD class=two></TD><TD class=goe>0.10</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;3</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>0.60</TD><TD class=spc></TD></TR>
+<TR><TD class=num>2</TD><TD class=elem>SSp1</TD><TD class=info></TD><TD class=bv>1.30</TD><TD class=two></TD><TD class=goe>0.35</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;3</TD><TD class=jud>&nbsp;3</TD><TD class=jud>&nbsp;3</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>1.65</TD><TD class=spc></TD></TR>
+<TR><TD class=num>3</TD><TD class=elem>1A</TD><TD class=info>F</TD><TD class=bv>1.10</TD><TD class=two></TD><TD class=goe>-0.55</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;-5</TD><TD class=jud>&nbsp;-5</TD><TD class=jud>&nbsp;-5</TD><TD class=jud>&nbsp;-5</TD><TD class=jud>&nbsp;-5</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>0.55</TD><TD class=spc></TD></TR>
+<TR><TD class=num>4</TD><TD class=elem>1Lz!</TD><TD class=info></TD><TD class=bv>0.60</TD><TD class=two></TD><TD class=goe>0.00</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;1</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;0</TD><TD class=jud>&nbsp;-1</TD><TD class=jud>&nbsp;-2</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>0.60</TD><TD class=spc></TD></TR>
+<TR><TD class=num>5</TD><TD class=elem>ChSt1</TD><TD class=info></TD><TD class=bv>2.00</TD><TD class=two></TD><TD class=goe>0.22</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;2</TD><TD class=jud>&nbsp;-3</TD><TD class=jud>&nbsp;0</TD><TD class=jud>&nbsp;0</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>2.22</TD><TD class=spc></TD></TR>
+<TR><TD class=num>6</TD><TD class=elem>1A+1T&lt;&lt;+1Lo</TD><TD class=info></TD><TD class=bv>1.60</TD><TD class=two></TD><TD class=goe>-0.07</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;1</TD><TD class=jud>&nbsp;3</TD><TD class=jud>&nbsp;-2</TD><TD class=jud>&nbsp;-1</TD><TD class=jud>&nbsp;-3</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>1.53</TD><TD class=spc></TD></TR>
+<TR><TD class=num>7</TD><TD class=elem>1F</TD><TD class=info></TD><TD class=bv>0.50</TD><TD class=two></TD><TD class=goe>-0.08</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;-2</TD><TD class=jud>&nbsp;-1</TD><TD class=jud>&nbsp;-2</TD><TD class=jud>&nbsp;-1</TD><TD class=jud>&nbsp;-5</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>0.42</TD><TD class=spc></TD></TR>
+<TR><TD class=num>8</TD><TD class=elem>CCoSpBV</TD><TD class=info></TD><TD class=bv>1.28</TD><TD class=two></TD><TD class=goe>-0.09</TD><TD class=ded>&nbsp;</TD><TD class=jud>&nbsp;0</TD><TD class=jud>&nbsp;0</TD><TD class=jud>&nbsp;-2</TD><TD class=jud>&nbsp;-2</TD><TD class=jud>&nbsp;0</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;&nbsp;</TD><TD class=jud>&nbsp;</TD><TD class=ref></TD><TD class=psv>1.19</TD><TD class=spc></TD></TR>
+<TR><TD></TD><TD class=tbvl COLSPAN=2>Total BV:</TD><TD class=tbvv>8.88</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD class=telml COLSPAN=3>Total elm. score:</TD><TD class=tps>8.76</TD></TR>
+<TR><TD></TD><TD class=pcl><B>Program Components</B></TD><TD></TD><TD></TD><TD></TD><TD class=fact><B>Factor</B></TD></TR>
+<TR><TD></TD><TD class=cn COLSPAN=3>Composition</TD><TD></TD><TD class=cf>0.92</TD><TD></TD><TD class=cjud>2.50</TD><TD class=cjud>2.25</TD><TD class=cjud>1.75</TD><TD class=cjud>3.00</TD><TD class=cjud>2.25</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD></TD><TD></TD><TD class=panel>2.33</TD></TR>
+<TR><TD></TD><TD class=cn COLSPAN=3>Presentation</TD><TD></TD><TD class=cf>0.92</TD><TD></TD><TD class=cjud>2.50</TD><TD class=cjud>3.00</TD><TD class=cjud>1.75</TD><TD class=cjud>3.00</TD><TD class=cjud>2.00</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD></TD><TD></TD><TD class=panel>2.50</TD></TR>
+<TR><TD></TD><TD class=cn COLSPAN=3>Skating Skills</TD><TD></TD><TD class=cf>2.76</TD><TD></TD><TD class=cjud>2.25</TD><TD class=cjud>1.75</TD><TD class=cjud>1.75</TD><TD class=cjud>3.25</TD><TD class=cjud>2.00</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD class=cjud>&nbsp;</TD><TD></TD><TD></TD><TD class=panel>2.00</TD></TR>
+<TR><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD></TD><TD class=gcfl COLSPAN=3>General Component Factor:</TD><TD></TD><TD class=gcfv>1.0</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD class=tfcs COLSPAN=5>Total factored comp. score:</TD><TD class=score>9.96</TD></TR>
+</TBODY>
+</TABLE>
+<TABLE class=ded>
+<THEAD>
+<TR><TH class=dn>Deductions</TH><TH class=name></TH><TH class=value></TH><TH class=name></TH><TH class=value></TH><TH class=name></TH><TH class=value></TH><TH class=total>-1.00</TH><TH class=rmar></TH></TR>
+</THEAD>
+<TBODY>
+<TR><TD></TD><TD class=name>Falls<B>:</B></TD><TD class=value>-1.00</TD></TR>
+</TBODY>
+</TABLE>
+<TABLE class=maj>
+<THEAD>
+<TR><TH class=name>Majority deductions</TH><TH class=jud>&nbsp;J1</TH><TH class=jud>&nbsp;J2</TH><TH class=jud>&nbsp;J3</TH><TH class=jud>&nbsp;J4</TH><TH class=jud>&nbsp;J5</TH><TH class=jud>&nbsp;J6</TH><TH class=jud>&nbsp;J7</TH><TH class=jud>&nbsp;J8</TH><TH class=jud>&nbsp;J9</TH><TH class=jud></TH><TH class=ref>&nbsp;REF</TH><TH class=rmar></TH></TR>
+</THEAD>
+<TBODY>
+</TBODY>
+</TABLE>
