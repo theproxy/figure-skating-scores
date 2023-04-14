@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import json
+import os
 
 def str2num(input):
     # print(f"{input} // {[c for c in input]}")
@@ -12,7 +13,7 @@ def str2num(input):
         return None
 
     return float(input)
-def parse_html_program(filename):
+def parse_html_program(filename, detailed=True):
     fp= open(filename,'r')
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
@@ -32,6 +33,15 @@ def parse_html_program(filename):
             continue
         key = official.find_all('td')[0].text
         program['officials'][key] = official.find_all('td')[1].text
+    program['detailed'] = soup.find_all('li',{'class':'judgeDetailRef'})[0].find('a')['href']
+
+    if detailed == True:
+        # get path
+        head, tail = os.path.split(filename)
+        detailed_file = os.path.join(head,program['detailed'])
+        print(f"{head} and {detailed_file}")
+        detailed_results = parse_html_detailed_scores(detailed_file)
+        program['detailed_resuilts'] = detailed_results
 
     return program
 
@@ -182,11 +192,11 @@ def parse_html_detailed_scores(filename):
     return event_sheet
 
 
-filename = 'soup-test/segm010.html'
-print("*************parsing started****************")
-event_sheet = parse_html_detailed_scores(filename)
-print("*************parsing completed****************")
-# json_str = json.dumps(event_sheet, indent=4)
+# filename = 'soup-test/segm010.html'
+# print("*************parsing started****************")
+# event_sheet = parse_html_detailed_scores(filename)
+# print("*************parsing completed****************")
+# # json_str = json.dumps(event_sheet, indent=4)
 
 filename = 'soup-test/CAT010SEG010.html'
 print("*************parsing started****************")
