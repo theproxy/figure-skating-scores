@@ -46,6 +46,61 @@ for i in range(n_skaters):
             current_elem["J9"] = row.find_all('td', {"class": "jud"})[8].text.strip()
             print(current_elem)
             elements.append(current_elem)
+        if count == n_elements+1:
+            #total BV and total elem score
+            total_component_score = row.find_all('td',{'class': 'tbvv'})[0].text
+            total_element_score = row.find_all('td',{'class': 'tps'})[0].text
+        if count == (n_elements + 2):
+            pass # header
+        if count == (n_elements + 3):
+            #composition
+            pc_composition_factor = row.find_all('td',{'class': 'cf'})[0].text
+            pc_composition_panel = row.find_all('td', {'class': 'panel'})[0].text
+            pccomp_jud = dict()
+            pccomp_jud["J1"] = row.find_all('td', {"class": "cjud"})[0].text.strip()
+            pccomp_jud["J2"] = row.find_all('td', {"class": "cjud"})[1].text.strip()
+            pccomp_jud["J3"] = row.find_all('td', {"class": "cjud"})[2].text.strip()
+            pccomp_jud["J4"] = row.find_all('td', {"class": "cjud"})[3].text.strip()
+            pccomp_jud["J5"] = row.find_all('td', {"class": "cjud"})[4].text.strip()
+            pccomp_jud["J6"] = row.find_all('td', {"class": "cjud"})[5].text.strip()
+            pccomp_jud["J7"] = row.find_all('td', {"class": "cjud"})[6].text.strip()
+            pccomp_jud["J8"] = row.find_all('td', {"class": "cjud"})[7].text.strip()
+            pccomp_jud["J9"] = row.find_all('td', {"class": "cjud"})[8].text.strip()
+            print(pccomp_jud)
+        if count == (n_elements + 4):
+            # presentation
+            pc_presentation_factor = row.find_all('td',{'class': 'cf'})[0].text
+            pc_presentation_panel = row.find_all('td', {'class': 'panel'})[0].text
+            pcpres_jud = dict()
+            pcpres_jud["J1"] = row.find_all('td', {"class": "cjud"})[0].text.strip()
+            pcpres_jud["J2"] = row.find_all('td', {"class": "cjud"})[1].text.strip()
+            pcpres_jud["J3"] = row.find_all('td', {"class": "cjud"})[2].text.strip()
+            pcpres_jud["J4"] = row.find_all('td', {"class": "cjud"})[3].text.strip()
+            pcpres_jud["J5"] = row.find_all('td', {"class": "cjud"})[4].text.strip()
+            pcpres_jud["J6"] = row.find_all('td', {"class": "cjud"})[5].text.strip()
+            pcpres_jud["J7"] = row.find_all('td', {"class": "cjud"})[6].text.strip()
+            pcpres_jud["J8"] = row.find_all('td', {"class": "cjud"})[7].text.strip()
+            pcpres_jud["J9"] = row.find_all('td', {"class": "cjud"})[8].text.strip()
+            print(pcpres_jud)
+        if count == (n_elements + 5):
+            # skating skills
+            pc_sskill_factor = row.find_all('td',{'class': 'cf'})[0].text
+            pc_skill_panel = row.find_all('td', {'class': 'panel'})[0].text
+            pcsskill_jud = dict()
+            pcsskill_jud["J1"] = row.find_all('td', {"class": "cjud"})[0].text.strip()
+            pcsskill_jud["J2"] = row.find_all('td', {"class": "cjud"})[1].text.strip()
+            pcsskill_jud["J3"] = row.find_all('td', {"class": "cjud"})[2].text.strip()
+            pcsskill_jud["J4"] = row.find_all('td', {"class": "cjud"})[3].text.strip()
+            pcsskill_jud["J5"] = row.find_all('td', {"class": "cjud"})[4].text.strip()
+            pcsskill_jud["J6"] = row.find_all('td', {"class": "cjud"})[5].text.strip()
+            pcsskill_jud["J7"] = row.find_all('td', {"class": "cjud"})[6].text.strip()
+            pcsskill_jud["J8"] = row.find_all('td', {"class": "cjud"})[7].text.strip()
+            pcsskill_jud["J9"] = row.find_all('td', {"class": "cjud"})[8].text.strip()
+            print(pcsskill_jud)
+        if count == (n_elements + 13):
+            # General Component Factor
+            general_component_factor = row.find_all('td', {"class": "gcfv"})[0].text.strip()
+            total_factored_score = row.find_all('td', {"class": "score"})[0].text.strip()
 
     skater_info['ded'] = tables[(4 * i) + 2]
     print(f"{skater_info['ded']}")
