@@ -13,7 +13,7 @@ def str2num(input):
 
     return float(input)
 
-def parse_html(filename):
+def parse_html_detailed_scores(filename):
     fp = open(filename, 'r')
     soup = BeautifulSoup(fp, features='html.parser')
     tables = soup.find_all('table')
@@ -161,7 +161,7 @@ def parse_html(filename):
 
 filename = 'soup-test/segm010.html'
 print("*************parsing started****************")
-event_sheet = parse_html(filename)
+event_sheet = parse_html_detailed_scores(filename)
 print("*************parsing completed****************")
 json_str = json.dumps(event_sheet, indent=4)
 print(json_str)
