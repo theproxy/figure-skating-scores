@@ -12,10 +12,33 @@ def str2num(input):
         return None
 
     return float(input)
+def parse_html_program(filename):
+    fp= open(filename,'r')
+    soup = BeautifulSoup(fp, features='html.parser')
+    fp.close()
+    program = dict()
+    program['competition'] = soup.find_all('title')[-1].text
+    program['program'] = soup.find_all('div',{'class': 'catTitle'})[0].text.strip()
+    program['file'] = filename
+    start_order = soup.find_all('tr', {'class': 'parent'})
+    program['start_order'] = dict()
+    for item in start_order:
+        key = item.find_all('td',{'class': 'start'})[0].text
+        program['start_order'][key] = item.find_all('td',{'class': 'name'})[0].text
+    officials = soup.find_all('table',{'class': 'officials'})[0].find_all('tr')
+    program['officials'] = dict()
+    for count, official in enumerate(officials):
+        if count == 0: #header
+            continue
+        key = official.find_all('td')[0].text
+        program['officials'][key] = official.find_all('td')[1].text
+
+    return program
 
 def parse_html_detailed_scores(filename):
     fp = open(filename, 'r')
     soup = BeautifulSoup(fp, features='html.parser')
+    fp.close()
     tables = soup.find_all('table')
 
     n_skaters = len(tables) // 4  # each skater has 4 tables
@@ -163,5 +186,12 @@ filename = 'soup-test/segm010.html'
 print("*************parsing started****************")
 event_sheet = parse_html_detailed_scores(filename)
 print("*************parsing completed****************")
+# json_str = json.dumps(event_sheet, indent=4)
+
+filename = 'soup-test/CAT010SEG010.html'
+print("*************parsing started****************")
+event_sheet = parse_html_program(filename)
+print("*************parsing completed****************")
 json_str = json.dumps(event_sheet, indent=4)
+
 print(json_str)
