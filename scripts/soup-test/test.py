@@ -13,11 +13,19 @@ for i in range(n_skaters):
     for item in skater_info['sum'].find_all('td'):
         skater_info[item['class'][0]] = item.get_text()
     skater_info['elm'] = tables[(4 * i) + 1]
+
+    # get number of all elements:
+    elem_nums = skater_info['elm'].find_all('td', {'class': 'num'})
+    n_elements = 0
+    for element_num in elem_nums:
+        if int(element_num.text) > n_elements:
+            n_elements = int(element_num.text)
+    print(f"Detected {n_elements} elements")
     elements = []
-    for count,row in enumerate(skater_info['elm'].find_all('tr'),start=1):
-        if count == 1:
+    for count,row in enumerate(skater_info['elm'].find_all('tr'),start=0):
+        if count == 0:
             continue
-        if count > 1 and count < 10:
+        if count >= 1 and count <= n_elements:
             current_elem = dict()
             current_elem["base_value"] = row.find_all('td', {"class": "bv"})[0].text
             current_elem["credit_flag"] = row.find_all('td', {"class": "num"})[0].text
