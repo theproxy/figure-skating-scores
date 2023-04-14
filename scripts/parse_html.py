@@ -13,6 +13,18 @@ def str2num(input):
         return None
 
     return float(input)
+
+
+def parse_html_competition(filename,detailed=False):
+    fp = open(filename,'r')
+    soup = BeautifulSoup(fp, features='html.parser')
+    fp.close()
+    competition = dict()
+    competition['name'] = soup.title.text
+    competition['date'] = soup.
+    return competition
+
+
 def parse_html_program(filename, detailed=True):
     fp= open(filename,'r')
     soup = BeautifulSoup(fp, features='html.parser')
@@ -198,9 +210,15 @@ def parse_html_detailed_scores(filename):
 # print("*************parsing completed****************")
 # # json_str = json.dumps(event_sheet, indent=4)
 
-filename = 'soup-test/CAT010SEG010.html'
+# filename = 'soup-test/CAT010SEG010.html'
+# print("*************parsing started****************")
+# event_sheet = parse_html_program(filename)
+# print("*************parsing completed****************")
+# json_str = json.dumps(event_sheet, indent=4)
+
+filename = 'soup-test/comp_index.html'
 print("*************parsing started****************")
-event_sheet = parse_html_program(filename)
+event_sheet = parse_html_competition(filename)
 print("*************parsing completed****************")
 json_str = json.dumps(event_sheet, indent=4)
 
