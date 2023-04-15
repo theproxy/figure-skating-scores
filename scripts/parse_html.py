@@ -21,7 +21,21 @@ def parse_html_competition(filename,detailed=False):
     fp.close()
     competition = dict()
     competition['name'] = soup.title.text
-    competition['date'] = soup.
+    competition['date'] = soup.find_all('h3',{"class":"date"})[0].text
+    competition['venue'] = soup.find_all('div')[1].find_all('h3')[1].text
+    competition['location'] = soup.find_all('div')[1].find_all('h3')[2].text
+    competition['events'] = list()
+    event_list = soup.find_all('table')[2].find_all('tr')
+    for count, event in enumerate(event_list):
+        if count == 0:
+            continue # header
+        event_info = dict()
+        event_info['name'] = event.find_all('td',{'class':'event'})[0].text.strip()
+        event_info['datetime'] = event.find_all('td',{'class':'event'})[1].text.strip()
+        event_info['state'] = event.find_all('td',{'class':'stat'})[0].text.strip()
+        event_info['file'] = event.find_all('td', {'class': 'stat'})[0].find('a')['href']
+        competition['events'].append(event_info)
+
     return competition
 
 
@@ -62,6 +76,8 @@ def parse_html_detailed_scores(filename):
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
     tables = soup.find_all('table')
+
+    n_skaters = len(tables) // 4  #
 
     n_skaters = len(tables) // 4  # each skater has 4 tables
     event_sheet = dict()
