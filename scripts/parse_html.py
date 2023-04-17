@@ -39,9 +39,11 @@ def get_html(url, save=True, dir=os.path.join('data','html'), refresh=False):
     # Check if the file already exists on disk
     file_path = os.path.join(url_dir, filename)
     if not refresh and os.path.exists(file_path):
+        print(f"Using cached file: {file_path}")
         with open(file_path, 'rb') as f:
             content = f.read()
     else:
+        print(f"Fetching {url}")
         # Fetch the content from the URL
         response = requests.get(url)
         content = response.content
@@ -91,7 +93,7 @@ def parse_html_competition(filename,detailed=False):
 
 
 def parse_html_program(filename, detailed=True):
-    print(f"PHP-> {filename}")
+    # print(f"PHP-> {filename}")
     fp= open(filename,'r')
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
@@ -111,7 +113,11 @@ def parse_html_program(filename, detailed=True):
             continue
         key = official.find_all('td')[0].text
         program['officials'][key] = official.find_all('td')[1].text
-    program['detailed'] = soup.find_all('li',{'class':'judgeDetailRef'})[0].find('a')['href']
+    try:
+        program['detailed'] = soup.find_all('li',{'class':'judgeDetailRef'})[0].find('a')['href']
+    except KeyError as e:
+        print(f"No key found, probably no detailed scores: {e}")
+        program['detailed'] = None
 
     if detailed == True:
         # get path
@@ -124,7 +130,7 @@ def parse_html_program(filename, detailed=True):
     return program
 
 def parse_html_detailed_scores(filename):
-    print(f"PHDS -> {filename}")
+    # print(f"PHDS -> {filename}")
     fp = open(filename, 'r')
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
