@@ -5,6 +5,20 @@ import os
 import requests
 from urllib.parse import urlparse, quote
 
+def get_version(soup):
+    comments = soup.find_all(string=lambda text: isinstance(text, Comment))
+    version = None
+    for comment in comments:
+        if 'ijsLive' in comment:
+            # version = comments[1].strip().split(' ')[-1]
+            words = comment.strip().split(' ')
+            for word_idx, word in enumerate(words):
+                if word == 'ijsLive':
+                    version = words[word_idx + 1]
+
+    print(f"Version is {version}")
+    return version
+
 def str2num(input):
     # print(f"{input} // {[c for c in input]}")
     if input == '-':
@@ -73,22 +87,61 @@ def parse_html_competition(filename,detailed=False):
     fp = open(filename,'r')
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
+    version = get_version(soup)
     competition = dict()
-    competition['name'] = soup.title.text
-    competition['date'] = soup.find_all('h3',{"class":"date"})[0].text
-    competition['venue'] = soup.find_all('div')[1].find_all('h3')[1].text
-    competition['location'] = soup.find_all('div')[1].find_all('h3')[2].text
-    competition['events'] = list()
-    event_list = soup.find_all('table')[2].find_all('tr')
-    for count, event in enumerate(event_list):
-        if count == 0:
-            continue # header
-        event_info = dict()
-        event_info['name'] = event.find_all('td',{'class':'event'})[0].text.strip()
-        event_info['datetime'] = event.find_all('td',{'class':'event'})[1].text.strip()
-        event_info['state'] = event.find_all('td',{'class':'stat'})[0].text.strip()
-        event_info['file'] = event.find_all('td', {'class': 'stat'})[0].find('a')['href']
-        competition['events'].append(event_info)
+
+    if version > '2.0' and version < '2.3.0':
+        competition['name'] = soup.title.text
+        competition['date'] = soup.find_all('h3', {"class": "date"})[0].text
+        competition['venue'] = soup.find_all('div')[1].find_all('h3')[1].text
+        competition['location'] = soup.find_all('div')[1].find_all('h3')[2].text
+        competition['events'] = list()
+        event_list = soup.find_all('table')[2].find_all('tr')
+        for count, event in enumerate(event_list):
+            if count == 0:
+                continue  # header
+            try:
+                event_info = dict()
+                event_info['name'] = event.find_all('td', {'class': 'event'})[0].text.strip()
+                event_info['datetime'] = event.find_all('td', {'class': 'event'})[1].text.strip()
+                event_info['state'] = event.find_all('td', {'class': 'stat'})[0].text.strip()
+                event_info['file'] = event.find_all('td', {'class': 'stat'})[0].find('a')['href']
+                competition['events'].append(event_info)
+            except:
+                # Free Dance elements, they are parsed differently #TODO: how does this show category + dance??
+                # print(f"Error: {event}")
+                event_info = dict()
+                event_info['name'] = event.find_all('td', {'class': 'time'})[0].text.strip()
+                event_info['datetime'] = event.find_all('td', {'class': 'event'})[0].text.strip()
+                event_info['state'] = event.find_all('td', {'class': 'stat'})[0].text.strip()
+
+                #event_info['file'] = event.find_all('td', {'class': 'stat'})[0].find('a')['href']
+                #TODO: This has a chance to have no link anywhere
+                outside_event_info_file = event.find_all('td', {'class': 'stat'})[0].find('a')
+                if outside_event_info_file is not None:
+                    event_info['file'] = outside_event_info_file['href']
+                else:
+                    event_info['file'] = None
+                competition['events'].append(event_info)
+                continue
+
+    if version >= '2.3.0':
+
+        competition['name'] = soup.title.text
+        competition['date'] = soup.find_all('h3',{"class":"date"})[0].text
+        competition['venue'] = soup.find_all('div')[1].find_all('h3')[1].text
+        competition['location'] = soup.find_all('div')[1].find_all('h3')[2].text
+        competition['events'] = list()
+        event_list = soup.find_all('table')[2].find_all('tr')
+        for count, event in enumerate(event_list):
+            if count == 0:
+                continue # header
+            event_info = dict()
+            event_info['name'] = event.find_all('td',{'class':'event'})[0].text.strip()
+            event_info['datetime'] = event.find_all('td',{'class':'event'})[1].text.strip()
+            event_info['state'] = event.find_all('td',{'class':'stat'})[0].text.strip()
+            event_info['file'] = event.find_all('td', {'class': 'stat'})[0].find('a')['href']
+            competition['events'].append(event_info)
 
     return competition
 
@@ -135,12 +188,7 @@ def parse_html_detailed_scores(filename):
     fp = open(filename, 'r')
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
-    comments = soup.find_all(string=lambda text: isinstance(text, Comment))
-    version = None
-    for comment in comments:
-        if 'ijsLive' in comment:
-            version = comments[1].strip().split(' ')[-1]
-    print(f"Version is {version}")
+    version = get_version(soup)
     event_sheet = dict()
     performances = list()
 
@@ -424,12 +472,12 @@ def parse_html_detailed_scores(filename):
 
 #
 # filename = 'soup-test/SEGM034.html'
-# # filename = 'soup-test/segm010.html'
+# filename = 'soup-test/segm010.html'
 # print("*************parsing started****************")
 # event_sheet = parse_html_detailed_scores(filename)
 # print("*************parsing completed****************")
 # detailed_json_str = json.dumps(event_sheet, indent=4)
-#
+# #
 # filename = 'soup-test/CAT010SEG010.html'
 # filename = 'soup-test/CAT036SEG034.html'
 # print("*************parsing started****************")
@@ -437,11 +485,12 @@ def parse_html_detailed_scores(filename):
 # print("*************parsing completed****************")
 # category_json_str = json.dumps(event_sheet, indent=4)
 #
-# # # filename = 'soup-test/comp_index.html'
-# # print("*************parsing started****************")
-# # event_sheet = parse_html_competition(filename)
-# # print("*************parsing completed****************")
-# # json_str = json.dumps(event_sheet, indent=4)
-# #
+filename = 'soup-test/comp_index.html'
+filename = 'soup-test/30348.asp'
+print("*************parsing started****************")
+event_sheet = parse_html_competition(filename)
+print("*************parsing completed****************")
+json_str = json.dumps(event_sheet, indent=4)
+print(json_str)
 # print(detailed_json_str)
 # print(category_json_str)
