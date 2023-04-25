@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 from bs4 import Comment
 import json
 import os
+import requests
+from urllib.parse import urlparse, quote
 
 def str2num(input):
     # print(f"{input} // {[c for c in input]}")
@@ -14,6 +16,57 @@ def str2num(input):
         return None
 
     return float(input)
+
+
+def get_html(url, save=True, dir=os.path.join('data','html'), refresh=False):
+    """
+    Fetches the content of a URL and returns a dictionary with the filename, base URL, and content.
+    If save is True, the file is saved as filename in a directory based on the URL.
+    If refresh is True, always make a new request even if the file already exists on disk.
+    """
+    # Extract the filename from the URL
+    parsed_url = urlparse(url)
+    filename = parsed_url.path.split('/')[-1]
+
+    # Create a directory based on the URL
+    path_without_filename = parsed_url.path.rsplit('/', 1)[0] + '/'
+    url_dir = os.path.join(dir, parsed_url.netloc, quote(path_without_filename, safe=''))
+
+    if not os.path.exists(url_dir):
+        print(f"*** Making {url_dir} directory ***")
+        os.makedirs(url_dir, exist_ok=True)
+
+
+    # Check if the file already exists on disk
+    file_path = os.path.join(url_dir, filename)
+    if not refresh and os.path.exists(file_path):
+        print(f"Using cached file: {file_path}")
+        with open(file_path, 'rb') as f:
+            content = f.read()
+    else:
+        print(f"Fetching {url}")
+        # Fetch the content from the URL
+        response = requests.get(url)
+        content = response.content
+
+        # Save the file if save is True
+        if save:
+            with open(file_path, 'wb') as f:
+                f.write(content)
+
+
+    # Create a dictionary with the URL info and return it
+    url_info = {
+        'filename': parsed_url.path.split('/')[-1],
+        'full_path': url,
+        'url_path': path_without_filename,
+        'base': f"{parsed_url.scheme}://{parsed_url.netloc}",
+        'content': content,
+        'file_path': file_path,
+        'dir_path': url_dir,
+    }
+
+    return url_info
 
 
 def parse_html_competition(filename,detailed=False):
@@ -41,6 +94,7 @@ def parse_html_competition(filename,detailed=False):
 
 
 def parse_html_program(filename, detailed=True):
+    # print(f"PHP-> {filename}")
     fp= open(filename,'r')
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
@@ -60,7 +114,11 @@ def parse_html_program(filename, detailed=True):
             continue
         key = official.find_all('td')[0].text
         program['officials'][key] = official.find_all('td')[1].text
-    program['detailed'] = soup.find_all('li',{'class':'judgeDetailRef'})[0].find('a')['href']
+    try:
+        program['detailed'] = soup.find_all('li',{'class':'judgeDetailRef'})[0].find('a')['href']
+    except KeyError as e:
+        print(f"No key found, probably no detailed scores: {e}")
+        program['detailed'] = None
 
     if detailed == True:
         # get path
@@ -73,6 +131,7 @@ def parse_html_program(filename, detailed=True):
     return program
 
 def parse_html_detailed_scores(filename):
+    # print(f"PHDS -> {filename}")
     fp = open(filename, 'r')
     soup = BeautifulSoup(fp, features='html.parser')
     fp.close()
@@ -377,10 +436,10 @@ json_str = json.dumps(event_sheet, indent=4)
 # print("*************parsing completed****************")
 # json_str = json.dumps(event_sheet, indent=4)
 
-# filename = 'soup-test/comp_index.html'
+# # filename = 'soup-test/comp_index.html'
 # print("*************parsing started****************")
 # event_sheet = parse_html_competition(filename)
 # print("*************parsing completed****************")
 # json_str = json.dumps(event_sheet, indent=4)
-
-print(json_str)
+#
+# print(json_str)
