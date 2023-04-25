@@ -485,12 +485,12 @@ def parse_html_detailed_scores(filename):
 # print("*************parsing completed****************")
 # category_json_str = json.dumps(event_sheet, indent=4)
 #
-filename = 'soup-test/comp_index.html'
-filename = 'soup-test/30348.asp'
-print("*************parsing started****************")
-event_sheet = parse_html_competition(filename)
-print("*************parsing completed****************")
-json_str = json.dumps(event_sheet, indent=4)
-print(json_str)
+# filename = 'soup-test/comp_index.html'
+# filename = 'soup-test/30348.asp'
+# print("*************parsing started****************")
+# event_sheet = parse_html_competition(filename)
+# print("*************parsing completed****************")
+# json_str = json.dumps(event_sheet, indent=4)
+# print(json_str)
 # print(detailed_json_str)
 # print(category_json_str)
