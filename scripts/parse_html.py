@@ -40,8 +40,8 @@ def get_html(url, save=True, dir=os.path.join('data','html'), refresh=False):
     If refresh is True, always make a new request even if the file already exists on disk.
     """
     # Extract the filename from the URL
-    parsed_url = urlparse(url)
-    filename = parsed_url.path.split('/')[-1]
+    parsed_url = urlparse(url.strip())
+    filename = parsed_url.path.split('/')[-1].strip()
 
     # Create a directory based on the URL
     path_without_filename = parsed_url.path.rsplit('/', 1)[0] + '/'
@@ -528,7 +528,7 @@ if __name__ == "__main__":
     """.strip()
     url_list = []
     for url in urls.split('\n'):
-        url_parsed = remove_comment(url)
+        url_parsed = remove_comment(url).strip()
         if url_parsed != "":
             url_list.append(url_parsed)
     url_list
@@ -543,32 +543,33 @@ if __name__ == "__main__":
         competition['data'] = data
         competitions.append(competition)
 
-        competition_tree = list()
-        for competition in competitions:
-            competition_node = dict()
-            meta = competition['meta']
-            print(f"****** {competition['data']['name']} ******")
-            event_list = list()
-            for event in competition['data']['events']:
-                event_node = dict()
-                try:
-                    event_url = meta['base'] + meta['url_path'] + event['file']
-                except Exception as e:
-                    print(f"Could not get event_url: {e}")
-                event_file = get_html(event_url)
-                event_info = parse_html_program(event_file['file_path'], detailed=False)
-                if event_info['detailed'] != None:
-                    event_detail_url = meta['base'] + meta['url_path'] + event_info['detailed']
-                    detailed_file = get_html(event_detail_url)
-                    event_detailed_info = parse_html_detailed_scores(detailed_file['file_path'])
-                    event_info['detailed_scores'] = event_detailed_info
-                event_list.append(event_info)
+    competition_tree = list()
+    for competition in competitions:
+        competition_node = dict()
+        meta = competition['meta']
+        print(f"****** {competition['data']['name']} ******")
+        event_list = list()
+        for event in competition['data']['events']:
+            event_node = dict()
+            try:
+                event_url = meta['base'] + meta['url_path'] + event['file']
+            except Exception as e:
+                print(f"Could not get event_url: {e}")
+            event_file = get_html(event_url)
+            event_info = parse_html_program(event_file['file_path'], detailed=False)
+            if event_info['detailed'] != None:
+                event_detail_url = meta['base'] + meta['url_path'] + event_info['detailed']
+                detailed_file = get_html(event_detail_url)
+                event_detailed_info = parse_html_detailed_scores(detailed_file['file_path'])
+                event_info['detailed_scores'] = event_detailed_info
+            event_list.append(event_info)
 
-            competition_node['name'] = competition['data']['name']
-            competition_node['event'] = event_list
-            competition_tree.append(competition_node)
-            write_path = os.path.join('data','json')
-            filename = "".join(competition_node['name'].split()
-            if not os.path.exists(write_path):
-                os.mkdir(write_path,parents=True, exists_ok=True)
-            json.dump(competition_node, os.path.join(write_path,filename))
+        competition_node['name'] = competition['data']['name']
+        competition_node['event'] = event_list
+        competition_tree.append(competition_node)
+        write_path = os.path.join('data','json')
+        filename = "".join(competition_node['name'].split())
+        if not os.path.exists(write_path):
+            os.mkdir(write_path,parents=True, exists_ok=True)
+        with open(os.path.join(write_path,filename+".json"),'w') as write_fp:
+            json.dump(competition_node, write_fp)
