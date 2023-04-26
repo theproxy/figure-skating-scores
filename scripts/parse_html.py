@@ -283,21 +283,24 @@ def parse_html_detailed_scores(filename):
                     continue
                 if count == (n_elements + 7):
                     # skating skills
-                    current_component = dict()
-                    current_component['component_desc'] = "Interpretation of the Music"
-                    current_component['factor'] = str2num(row.find_all('td', {'class': 'cf'})[0].text)
-                    current_component['scores_of_panel'] = str2num(row.find_all('td', {'class': 'panel'})[0].text)
-                    current_component['ref'] = None  # IDK?
-                    current_component["J1"] = str2num(row.find_all('td', {"class": "cjud"})[0].text.strip())
-                    current_component["J2"] = str2num(row.find_all('td', {"class": "cjud"})[1].text.strip())
-                    current_component["J3"] = str2num(row.find_all('td', {"class": "cjud"})[2].text.strip())
-                    current_component["J4"] = str2num(row.find_all('td', {"class": "cjud"})[3].text.strip())
-                    current_component["J5"] = str2num(row.find_all('td', {"class": "cjud"})[4].text.strip())
-                    current_component["J6"] = str2num(row.find_all('td', {"class": "cjud"})[5].text.strip())
-                    current_component["J7"] = str2num(row.find_all('td', {"class": "cjud"})[6].text.strip())
-                    current_component["J8"] = str2num(row.find_all('td', {"class": "cjud"})[7].text.strip())
-                    current_component["J9"] = str2num(row.find_all('td', {"class": "cjud"})[8].text.strip())
-                    components.append(current_component)
+                    try:
+                        current_component = dict()
+                        current_component['component_desc'] = "Interpretation of the Music"
+                        current_component['factor'] = str2num(row.find_all('td', {'class': 'cf'})[0].text)
+                        current_component['scores_of_panel'] = str2num(row.find_all('td', {'class': 'panel'})[0].text)
+                        current_component['ref'] = None  # IDK?
+                        current_component["J1"] = str2num(row.find_all('td', {"class": "cjud"})[0].text.strip())
+                        current_component["J2"] = str2num(row.find_all('td', {"class": "cjud"})[1].text.strip())
+                        current_component["J3"] = str2num(row.find_all('td', {"class": "cjud"})[2].text.strip())
+                        current_component["J4"] = str2num(row.find_all('td', {"class": "cjud"})[3].text.strip())
+                        current_component["J5"] = str2num(row.find_all('td', {"class": "cjud"})[4].text.strip())
+                        current_component["J6"] = str2num(row.find_all('td', {"class": "cjud"})[5].text.strip())
+                        current_component["J7"] = str2num(row.find_all('td', {"class": "cjud"})[6].text.strip())
+                        current_component["J8"] = str2num(row.find_all('td', {"class": "cjud"})[7].text.strip())
+                        current_component["J9"] = str2num(row.find_all('td', {"class": "cjud"})[8].text.strip())
+                        components.append(current_component)
+                    except Exception as e:
+                        print(f"Exception in detailed parsing {e}, row: {row}, count: {count}")
                 if count == (n_elements + 13):
                     # General Component Factor
                     general_component_factor = str2num(row.find_all('td', {"class": "gcfv"})[0].text.strip())
