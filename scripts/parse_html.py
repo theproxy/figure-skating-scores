@@ -4,6 +4,7 @@ import json
 import os
 import requests
 from urllib.parse import urlparse, quote
+import re
 
 def get_version(soup):
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -470,27 +471,101 @@ def parse_html_detailed_scores(filename):
     event_sheet['performances'] = performances
     return event_sheet
 
-#
-# filename = 'soup-test/SEGM034.html'
-# filename = 'soup-test/segm010.html'
-# print("*************parsing started****************")
-# event_sheet = parse_html_detailed_scores(filename)
-# print("*************parsing completed****************")
-# detailed_json_str = json.dumps(event_sheet, indent=4)
-# #
-# filename = 'soup-test/CAT010SEG010.html'
-# filename = 'soup-test/CAT036SEG034.html'
-# print("*************parsing started****************")
-# event_sheet = parse_html_program(filename)
-# print("*************parsing completed****************")
-# category_json_str = json.dumps(event_sheet, indent=4)
-#
-# filename = 'soup-test/comp_index.html'
-# filename = 'soup-test/30348.asp'
-# print("*************parsing started****************")
-# event_sheet = parse_html_competition(filename)
-# print("*************parsing completed****************")
-# json_str = json.dumps(event_sheet, indent=4)
-# print(json_str)
-# print(detailed_json_str)
-# print(category_json_str)
+def test():
+
+    filename = 'soup-test/SEGM034.html'
+    filename = 'soup-test/segm010.html'
+    print("*************parsing started****************")
+    event_sheet = parse_html_detailed_scores(filename)
+    print("*************parsing completed****************")
+    detailed_json_str = json.dumps(event_sheet, indent=4)
+    #
+    filename = 'soup-test/CAT010SEG010.html'
+    filename = 'soup-test/CAT036SEG034.html'
+    print("*************parsing started****************")
+    event_sheet = parse_html_program(filename)
+    print("*************parsing completed****************")
+    category_json_str = json.dumps(event_sheet, indent=4)
+
+    filename = 'soup-test/comp_index.html'
+    filename = 'soup-test/30348.asp'
+    print("*************parsing started****************")
+    event_sheet = parse_html_competition(filename)
+    print("*************parsing completed****************")
+    json_str = json.dumps(event_sheet, indent=4)
+    print(json_str)
+    print(detailed_json_str)
+    print(category_json_str)
+
+def remove_comment(line):
+    m = re.match(r'^([^#]*)#(.*)$', line)
+    if m:  # The line contains a hash / comment
+        line = m.group(1)
+    return line
+
+
+if __name__ == "__main__":
+    urls = """
+    #2023
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32241/index.asp #genesse Biennial Invitational
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32243/index.asp #north atlatnic
+    #2022
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30862/index.asp # excel national festival
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30235/index.asp # 10th Annual Snowtown Invitational Competition
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30441/index.asp # 2022 Magnolia Open
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30348/index.asp # Morris Open
+    # PDF??? Cardinal Classic 2022
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30455/index.asp # 35th Annual Florida Open Championships
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30340/index.asp # Crossroads FSC Spring‐tacular Competition
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30357/index.asp # Southern CT Open
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30408/index.asp # May Day Open and Compete USA
+    http://ijs.usfigureskating.org/leaderboard/results/2022/30356/index.asp # North Shore Open
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30266/index.asp # Westchester Classic
+    https://ijs.usfigureskating.org/leaderboard/results/2022/30595/index.asp # Colonial Open
+    """.strip()
+    url_list = []
+    for url in urls.split('\n'):
+        url_parsed = remove_comment(url)
+        if url_parsed != "":
+            url_list.append(url_parsed)
+    url_list
+
+    competitions = []
+    for url in url_list:
+        competition = dict()
+        content = get_html(url)
+        data = parse_html_competition(content['file_path'])
+        competition['url'] = url
+        competition['meta'] = content
+        competition['data'] = data
+        competitions.append(competition)
+
+        competition_tree = list()
+        for competition in competitions:
+            competition_node = dict()
+            meta = competition['meta']
+            print(f"****** {competition['data']['name']} ******")
+            event_list = list()
+            for event in competition['data']['events']:
+                event_node = dict()
+                try:
+                    event_url = meta['base'] + meta['url_path'] + event['file']
+                except Exception as e:
+                    print(f"Could not get event_url: {e}")
+                event_file = get_html(event_url)
+                event_info = parse_html_program(event_file['file_path'], detailed=False)
+                if event_info['detailed'] != None:
+                    event_detail_url = meta['base'] + meta['url_path'] + event_info['detailed']
+                    detailed_file = get_html(event_detail_url)
+                    event_detailed_info = parse_html_detailed_scores(detailed_file['file_path'])
+                    event_info['detailed_scores'] = event_detailed_info
+                event_list.append(event_info)
+
+            competition_node['name'] = competition['data']['name']
+            competition_node['event'] = event_list
+            competition_tree.append(competition_node)
+            write_path = os.path.join('data','json')
+            filename = "".join(competition_node['name'].split()
+            if not os.path.exists(write_path):
+                os.mkdir(write_path,parents=True, exists_ok=True)
+            json.dump(competition_node, os.path.join(write_path,filename))
