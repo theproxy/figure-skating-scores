@@ -566,9 +566,11 @@ if __name__ == "__main__":
 
         competition_node['name'] = competition['data']['name']
         competition_node['event'] = event_list
+        competition_node['date'] = competition['data']['date']
         competition_tree.append(competition_node)
         write_path = os.path.join('data','json')
-        filename = "".join(competition_node['name'].split())
+        # filename is competition name with begin date appeneded
+        filename = "".join(competition_node['name'].split())+"_"+"".join(competition['data']['date'].split(' ')[0].split('/'))
         if not os.path.exists(write_path):
             os.mkdir(write_path,parents=True, exists_ok=True)
         with open(os.path.join(write_path,filename+".json"),'w') as write_fp:
