@@ -5,6 +5,7 @@ import os
 import requests
 from urllib.parse import urlparse, quote
 import re
+import time
 
 def get_version(soup):
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -62,6 +63,7 @@ def get_html(url, save=True, dir=os.path.join('data','html'), refresh=False):
         print(f"Fetching {url}")
         # Fetch the content from the URL
         response = requests.get(url)
+        time.sleep(.5)
         content = response.content
 
         # Save the file if save is True
@@ -135,14 +137,17 @@ def parse_html_competition(filename,detailed=False):
         competition['events'] = list()
         event_list = soup.find_all('table')[2].find_all('tr')
         for count, event in enumerate(event_list):
-            if count == 0:
-                continue # header
-            event_info = dict()
-            event_info['name'] = event.find_all('td',{'class':'event'})[0].text.strip()
-            event_info['datetime'] = event.find_all('td',{'class':'event'})[1].text.strip()
-            event_info['state'] = event.find_all('td',{'class':'stat'})[0].text.strip()
-            event_info['file'] = event.find_all('td', {'class': 'stat'})[0].find('a')['href']
-            competition['events'].append(event_info)
+            try:
+                if count == 0:
+                    continue # header
+                event_info = dict()
+                event_info['name'] = event.find_all('td',{'class':'event'})[0].text.strip()
+                event_info['datetime'] = event.find_all('td',{'class':'event'})[1].text.strip()
+                event_info['state'] = event.find_all('td',{'class':'stat'})[0].text.strip()
+                event_info['file'] = event.find_all('td', {'class': 'stat'})[0].find('a')['href']
+                competition['events'].append(event_info)
+            except Exception as e:
+                print(f"Issue with event {event_info['name']} at {competition['name']}")
 
     return competition
 
@@ -512,6 +517,34 @@ if __name__ == "__main__":
     #2023
     https://ijs.usfigureskating.org/leaderboard/results/2023/32241/index.asp #genesse Biennial Invitational
     https://ijs.usfigureskating.org/leaderboard/results/2023/32243/index.asp #north atlatnic
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32091/index.asp # 11th annual snowtown invitational
+    http://ijs.usfigureskating.org/leaderboard/results/2023/32190/index.asp # Magnolia Open
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32268/index.asp # Florida Open
+    # Capital Regional Council Kickoff
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32228/index.asp # 2023 Southern Connecticut Open
+    https://ijs.usfigureskating.org/leaderboard/results/2023/30947/index.asp # Crossroads FSC Spring-Tacular Competition
+    ######## Midwest
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32132/index.asp # 43rd annual northland figure skating competition
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32180/index.asp # albert viviani memorial competition
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32231/index.asp # alamo skate
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32119/index.asp # omaha winter festival skating competition
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32260/index.asp # 2023 Columbus Invitational
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32099/index.asp # Houston Invitational
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32128/index.asp # 2023 Denver Invitational
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32222/index.asp # Eau Claire Figure Skating Club 34th Annual
+    # Skate Kansas City
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32273/index.asp # Louisville Skating Academy Spring Invitational
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32151/index.asp # Howard E Van Camp Invitational
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32267/index.asp # cleveland invitational championship
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32280/index.asp # wim competition
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32283/index.asp # for collins classic
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32251/index.asp #2023 sugar skate
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32157/index.asp # tri-state competition
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32216/index.asp #2023 skate nashville
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32276/index.asp # spring funtastics
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32308/index.asp #skate bloomington 2023
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32272/index.asp # skate austin bluebonnet open
+    https://ijs.usfigureskating.org/leaderboard/results/2023/0032139/index.asp #47th annual ladybug
     #2022
     https://ijs.usfigureskating.org/leaderboard/results/2022/30862/index.asp # excel national festival
     https://ijs.usfigureskating.org/leaderboard/results/2022/30235/index.asp # 10th Annual Snowtown Invitational Competition
@@ -560,8 +593,11 @@ if __name__ == "__main__":
             if event_info['detailed'] != None:
                 event_detail_url = meta['base'] + meta['url_path'] + event_info['detailed']
                 detailed_file = get_html(event_detail_url)
-                event_detailed_info = parse_html_detailed_scores(detailed_file['file_path'])
-                event_info['detailed_scores'] = event_detailed_info
+                try:
+                    event_detailed_info = parse_html_detailed_scores(detailed_file['file_path'])
+                    event_info['detailed_scores'] = event_detailed_info
+                except Exception as e:
+                    print(f"Error in {e}: {detailed_file}")
             event_list.append(event_info)
 
         competition_node['name'] = competition['data']['name']
