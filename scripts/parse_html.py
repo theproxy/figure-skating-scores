@@ -545,6 +545,7 @@ if __name__ == "__main__":
     https://ijs.usfigureskating.org/leaderboard/results/2023/32308/index.asp #skate bloomington 2023
     https://ijs.usfigureskating.org/leaderboard/results/2023/32272/index.asp # skate austin bluebonnet open
     https://ijs.usfigureskating.org/leaderboard/results/2023/0032139/index.asp #47th annual ladybug
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32246/index.asp # northstar classic 2023
     #2022
     https://ijs.usfigureskating.org/leaderboard/results/2022/30862/index.asp # excel national festival
     https://ijs.usfigureskating.org/leaderboard/results/2022/30235/index.asp # 10th Annual Snowtown Invitational Competition
