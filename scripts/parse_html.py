@@ -523,6 +523,17 @@ if __name__ == "__main__":
     # Capital Regional Council Kickoff
     https://ijs.usfigureskating.org/leaderboard/results/2023/32228/index.asp # 2023 Southern Connecticut Open
     https://ijs.usfigureskating.org/leaderboard/results/2023/30947/index.asp # Crossroads FSC Spring-Tacular Competition
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32083/index.asp # Westchester Classic
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32246/index.asp # Northstar Spring Classic
+    # Three Rivers Spring Skate
+    # May Day Open
+    # North Shore Open
+    # Central Carolina Skating Classic
+    # Nassau County Figure Skating Championships
+    # 32nd Annual Spring Skate Festival
+    # Colonial Open
+    # Cardinal Classic
+    # White Rose Invitational
     ######## Midwest
     https://ijs.usfigureskating.org/leaderboard/results/2023/32132/index.asp # 43rd annual northland figure skating competition
     https://ijs.usfigureskating.org/leaderboard/results/2023/32180/index.asp # albert viviani memorial competition
@@ -545,7 +556,15 @@ if __name__ == "__main__":
     https://ijs.usfigureskating.org/leaderboard/results/2023/32308/index.asp #skate bloomington 2023
     https://ijs.usfigureskating.org/leaderboard/results/2023/32272/index.asp # skate austin bluebonnet open
     https://ijs.usfigureskating.org/leaderboard/results/2023/0032139/index.asp #47th annual ladybug
-    https://ijs.usfigureskating.org/leaderboard/results/2023/32246/index.asp # northstar classic 2023
+    # Spring Fling
+    #Magic City Ice Classic
+    # Memorial Trophy 2023
+    # 39th Annual Margaret Faulkner Springtime Invitational
+    # Excel and Beyond Competition
+    # Traverse City Cherry Classic
+    # Metro Indy Skating Challenge
+    # Heart of America Invitational
+    # Skate Dallas
     #2022
     https://ijs.usfigureskating.org/leaderboard/results/2022/30862/index.asp # excel national festival
     https://ijs.usfigureskating.org/leaderboard/results/2022/30235/index.asp # 10th Annual Snowtown Invitational Competition
