@@ -520,16 +520,17 @@ if __name__ == "__main__":
     https://ijs.usfigureskating.org/leaderboard/results/2023/32091/index.asp # 11th annual snowtown invitational
     http://ijs.usfigureskating.org/leaderboard/results/2023/32190/index.asp # Magnolia Open
     https://ijs.usfigureskating.org/leaderboard/results/2023/32268/index.asp # Florida Open
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32147/index.asp # 2023 Morris Open
     # Capital Regional Council Kickoff
     https://ijs.usfigureskating.org/leaderboard/results/2023/32228/index.asp # 2023 Southern Connecticut Open
     https://ijs.usfigureskating.org/leaderboard/results/2023/30947/index.asp # Crossroads FSC Spring-Tacular Competition
     https://ijs.usfigureskating.org/leaderboard/results/2023/32083/index.asp # Westchester Classic
     https://ijs.usfigureskating.org/leaderboard/results/2023/32246/index.asp # Northstar Spring Classic
-    # Three Rivers Spring Skate
-    # May Day Open
-    # North Shore Open
-    # Central Carolina Skating Classic
-    # Nassau County Figure Skating Championships
+    # Three Rivers Spring Skate (----PDF provided---)
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32234/index.asp # May Day Open
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32235/index.asp # North Shore Open
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32262/index.asp # Central Carolina Skating Classic
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32232/index.asp # Nassau County Figure Skating Championships
     # 32nd Annual Spring Skate Festival
     # Colonial Open
     # Cardinal Classic
@@ -556,9 +557,9 @@ if __name__ == "__main__":
     https://ijs.usfigureskating.org/leaderboard/results/2023/32308/index.asp #skate bloomington 2023
     https://ijs.usfigureskating.org/leaderboard/results/2023/32272/index.asp # skate austin bluebonnet open
     https://ijs.usfigureskating.org/leaderboard/results/2023/0032139/index.asp #47th annual ladybug
-    # Spring Fling
-    #Magic City Ice Classic
-    # Memorial Trophy 2023
+    # Spring Fling --- PDF
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32213/index.asp #Magic City Ice Classic
+    https://ijs.usfigureskating.org/leaderboard/results/2023/32287/index.asp # Memorial Trophy 2023
     # 39th Annual Margaret Faulkner Springtime Invitational
     # Excel and Beyond Competition
     # Traverse City Cherry Classic
